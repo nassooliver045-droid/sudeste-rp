@@ -1,6 +1,6 @@
 {
   "name": "sudeste-rp",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Site e sistema de whitelist do Sudeste RP",
   "main": "server.js",
@@ -9,5 +9,9 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "pg": "^8.16.3",
+    "tweetnacl": "^1.0.3"
   }
 }
