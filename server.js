@@ -135,9 +135,7 @@ function serveStatic(req, res) {
   if (!filePath.startsWith(ROOT)) return json(res, { ok: false }, 403);
 
   fs.stat(filePath, (err, stat) => {
-    if (!err && stat.isDirectory()) {
-      return serveFile(path.join(filePath, "index.html"), res);
-    }
+    if (!err && stat.isDirectory()) return serveFile(path.join(filePath, "index.html"), res);
     serveFile(filePath, res);
   });
 }
@@ -156,6 +154,7 @@ function serveFile(filePath, res) {
 
 const server = http.createServer((req, res) => {
   const pathname = new URL(req.url, `http://${req.headers.host || "localhost"}`).pathname;
+  if (pathname === "/api/health") return json(res, { ok: true, service: "sudeste-rp" });
   if (pathname === "/api/wl") return handleWhitelist(req, res);
   return serveStatic(req, res);
 });
