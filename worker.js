@@ -13,7 +13,7 @@ function clean(value, max = 1500) {
   return String(value ?? "").trim().slice(0, max);
 }
 
-function limitDiscord(value, max = 1024) {
+function limitDiscord(value, max = 750) {
   const text = clean(value, 1500);
   return text.length > max ? `${text.slice(0, max - 3)}...` : text;
 }
@@ -32,6 +32,7 @@ export default {
       }
 
       if (!env.DISCORD_WEBHOOK) {
+        console.error("WL: DISCORD_WEBHOOK não está disponível na versão ativa do Worker.");
         return json({ ok: false, error: "Webhook do Discord não configurado." }, 500);
       }
 
@@ -104,11 +105,14 @@ export default {
         });
 
         if (!response.ok) {
+          console.error("WL: Discord rejeitou o webhook. HTTP", response.status);
           return json({ ok: false, error: "Não foi possível enviar a WL para a Staff." }, 502);
         }
 
+        console.log("WL: envio para Discord concluído", protocol);
         return json({ ok: true, protocol });
-      } catch {
+      } catch (error) {
+        console.error("WL: erro interno", error instanceof Error ? error.message : String(error));
         return json({ ok: false, error: "Dados inválidos ou erro interno." }, 400);
       }
     }
