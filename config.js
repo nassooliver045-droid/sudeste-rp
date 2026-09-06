@@ -1,5 +1,4 @@
-// Configuração pública do site.
-// Depois de publicar o backend, coloque aqui a URL do Worker.
+// A API usa o mesmo domínio do site, então o webhook nunca fica exposto no navegador.
 window.SUDESTE_CONFIG = {
-  API_URL: "COLOQUE_AQUI_A_URL_DO_SEU_WORKER"
+  API_URL: "/api/wl"
 };
