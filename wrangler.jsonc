@@ -3,6 +3,9 @@
   "name": "sudeste-rp",
   "main": "./worker.js",
   "compatibility_date": "2026-09-06",
+  "secrets": {
+    "required": ["DISCORD_WEBHOOK"]
+  },
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
