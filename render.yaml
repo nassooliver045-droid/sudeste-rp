@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sudeste-rp
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: DISCORD_WEBHOOK
+        sync: false
